@@ -1,0 +1,273 @@
+
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>경영 및 IT 용어사전</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font: Inter (for Tailwind defaults) and Korean font setting -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+        body {
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen p-4 sm:p-8">
+
+    <div class="max-w-4xl mx-auto">
+        <!-- Header -->
+        <header class="text-center mb-8 p-6 bg-white shadow-xl rounded-2xl">
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-indigo-700 mb-2">
+                경영 및 IT 용어사전
+            </h1>
+            <p class="text-gray-500">핵심 금융, 데이터, 4차 산업혁명 트렌드 용어 정리</p>
+        </header>
+
+        <!-- Navigation Buttons/Links (NEWLY ADDED) -->
+        <div class="flex flex-col sm:flex-row justify-between items-center mb-6 space-y-3 sm:space-y-0 sm:space-x-4">
+            <!-- Home Button -->
+            <!-- Note: Changed href from '#' to 'index.html' -->
+            <a href="index.html" class="w-full sm:w-auto flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-xl text-white bg-indigo-500 hover:bg-indigo-600 shadow-md transition duration-150 transform hover:scale-[1.02] active:scale-[0.98]">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+                </svg>
+                홈으로 가기
+            </a>
+            
+            <!-- External Link -->
+            <!-- Note: Replace the placeholder URL with your actual link -->
+            <a href="https://github.com/placeholder-repo" target="_blank" class="w-full sm:w-auto flex items-center justify-center px-6 py-3 border border-indigo-500 text-base font-medium rounded-xl text-indigo-700 bg-white hover:bg-indigo-50 shadow-md transition duration-150 transform hover:scale-[1.02] active:scale-[0.98]">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+                관련 자료 (외부 링크)
+            </a>
+        </div>
+
+        <!-- Search Input -->
+        <div class="mb-8 p-4 bg-white rounded-xl shadow-lg">
+            <input type="text" id="searchInput" placeholder="용어 또는 정의를 검색하세요 (예: 핀테크, 빅데이터, ESG)"
+                   class="w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500 transition duration-150 text-base"
+                   oninput="filterGlossary()">
+        </div>
+
+        <!-- Glossary Container -->
+        <div id="glossaryContainer">
+            <!-- Content will be injected here by JavaScript -->
+        </div>
+
+        <!-- No Results Message -->
+        <div id="noResults" class="hidden text-center p-8 bg-yellow-100 border border-yellow-300 text-yellow-800 rounded-xl mt-8">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span>검색 결과가 없습니다. 다른 검색어로 시도해 보세요.</span>
+        </div>
+    </div>
+
+    <script>
+        // 1. Glossary Data (Parsed from the provided Markdown table)
+        const glossaryData = [
+            // 금융 및 핀테크
+            { category: "금융 및 핀테크", term: "핀테크 (Fintech)", definition: "금융(Finance)과 기술(Technology)의 융복합(convergence)을 의미하며 [1], 간편결제, 송금, 펀드, 자산관리 등 기존 금융 서비스에 IT를 결합하는 것을 목적으로 함 [1]." },
+            { category: "금융 및 핀테크", term: "테크핀 (Techfin)", definition: "정보기술(IT)을 기반으로 새로운 금융 서비스를 결합하는 개념으로 [1], 인터넷 전문은행이나 혁신적인 금융 서비스를 제공하는 스타트업 등 IT 기술을 금융에 접목하는 기업을 통칭하는 포괄적인 개념임 [1]." },
+            { category: "금융 및 핀테크", term: "간편결제시스템", definition: "사용자들이 온라인 및 오프라인에서 신속하고 쉽게 결제할 수 있도록 지원하는 전자 결제 방식 [2]. 빠른 결제, 높은 보안성, 편리성 제공이 장점이며 [3], 카카오페이나 네이버페이 등이 핀테크 업체와 은행 협업 사례로 존재함 [3, 4]." },
+            { category: "금융 및 핀테크", term: "로보어드바이저 (Robo-Adviser)", definition: "빅데이터와 인공지능 알고리즘 기반으로 고객에게 온라인으로 자산배분 포트폴리오를 관리해주는 금융자문서비스 [5]. 인간의 주관적 판단 없이 수학적 규칙이나 알고리즘을 이용하며 [5], ETF를 활용한 분산투자를 특성으로 하며 중위험·중수익 고객군에게 적합함 [6]." },
+            { category: "금융 및 핀테크", term: "인슈어테크 (InsurTech)", definition: "보험(Insurance)과 기술(Technology)의 합성어로 [7], 기술(AI, 빅데이터, 블록체인, IoT 등)을 활용해 보험 산업의 효율성과 고객 경험을 향상시키는 것을 목표로 함 [7]. 언더라이팅, 청구 처리 자동화, 맞춤형 보험 상품 제공 등이 주요 분야임 [8]." },
+            { category: "금융 및 핀테크", term: "P2P 금융 플랫폼 (Peer to Peer)", definition: "금융회사의 중개 없이 사적 개인 간에 금융거래가 체결될 수 있도록 중개하는 금융플랫폼 [9]. 대표적인 서비스인 P2P 대출은 온라인상에서 차입자가 정보를 게시하면 투자자들이 자금을 빌려주는 거래를 말함 [10]." },
+            { category: "금융 및 핀테크", term: "오픈뱅킹 (Open Banking)", definition: "금융 데이터와 서비스를 안전하게 공유할 수 있도록 개방된 표준을 통해 금융 기관과 제3자 간의 협력을 촉진하는 시스템 [11]. API(Application Programming Interface)를 활용하여 데이터의 투명성과 효율성을 높임 [11]." },
+            { category: "금융 및 핀테크", term: "마이데이터 (MyData)", definition: "데이터 관리와 활용 권한이 정보주체인 개인에게 있음을 강조하는 개념 [12]. 은행, 카드, 보험, 증권, 통신 등 여러 곳에 흩어진 개인 금융정보를 일괄 수집하여 고객에게 최적화된 금융상품 추천 및 재무 컨설팅을 지원함 [12]." },
+            { category: "금융 및 핀테크", term: "ETF (상장지수펀드)", definition: "주식과 동일한 결제 기간으로 펀드보다 환금성이 높고 [6], 개별 주식에 비해 위험과 가격 변동성이 상대적으로 작은 특징을 가진 투자 수단임 [6]." },
+            { category: "금융 및 핀테크", term: "리밸런싱 (Rebalancing)", definition: "로보어드바이저가 수행하는 주요 기능 중 하나로, 운용 자산의 편입 비중을 재조정하는 서비스임 [7, 13]." },
+            
+            // 데이터 및 IT 기술
+            { category: "데이터 및 IT 기술", term: "빅데이터 (Big Data)", definition: "정형, 반정형, 비정형 데이터를 모두 포함하며, 일상적으로 비즈니스에 영향을 미치는 대용량 데이터를 지칭함 [14, 15]. 5V(Volume, Velocity, Variety, Value, Variable) 특징을 가지며 [14, 15], 분석의 목적은 가치 창출임 [16]." },
+            { category: "데이터 및 IT 기술", term: "정형 데이터 (Structured Data)", definition: "일정한 규칙에 따라 체계적으로 정리된 데이터 (예: Excel, 통계자료) [15]." },
+            { category: "데이터 및 IT 기술", term: "비정형 데이터 (Un-structured Data)", definition: "일정한 규칙이 없는 데이터로, 스마트 기기를 통해 형성된 데이터 (예: 그림, 동영상, SNS 정보) [15]." },
+            { category: "데이터 및 IT 기술", term: "메타 데이터 (Meta Data)", definition: "데이터에 대한 정보를 담고 있는 데이터를 지칭하는 용어로 [17], 파일의 위치, 크기, 소유자, 허가권 등의 정보를 기록함 [18]." },
+            { category: "데이터 및 IT 기술", term: "데이터웨어하우스 (DW)", definition: "데이터 추출, 변환, 통합, 요약된 데이터베이스로, 데이터의 통합 저장소를 지칭함 [18, 19]." },
+            { category: "데이터 및 IT 기술", term: "데이터마트 (DM)", definition: "소규모로 구축된 데이터웨어하우스를 지칭함 [19, 20]." },
+            { category: "데이터 및 IT 기술", term: "OLTP (On-line Transaction Processing)", definition: "비즈니스 업무를 처리하는 과정에서 발생하는 데이터로, 단순한 거래 처리와 현황 파악을 목적으로 하는 처리 방식임 [18]." },
+            { category: "데이터 및 IT 기술", term: "OLAP (On-line Analytical Processing)", definition: "end-user가 다양한 분석과 의사결정을 하기 위해 요구하는 다차원 정보 제공 방식이며, DW에 저장됨 [18]." },
+            { category: "데이터 및 IT 기술", term: "무결성 (Integrity)", definition: "관계형 데이터베이스에서 데이터의 정확성과 일관성을 뜻하며, 결손과 부정함이 없음을 보증하는 원칙임 [19, 21]." },
+            { category: "데이터 및 IT 기술", term: "Bit (비트)", definition: "정보의 최소 단위임 [22, 23]." },
+            { category: "데이터 및 IT 기술", term: "Packet (패킷)", definition: "전송의 최소 단위 (package + bucket 합성어)로, 네트워크 관리의 효율성을 높이기 위한 것임 [16, 22]." },
+            
+            // 4차 산업혁명 및 AI
+            { category: "4차 산업혁명 및 AI", term: "4차 산업혁명 (4th IR)", definition: "빅데이터 기반 디지털 전환, 가상세계와 현실세계의 융복합을 통한 새로운 가치 창출, CPS와 같은 초연결 사회 구현을 핵심으로 함 [24]." },
+            { category: "4차 산업혁명 및 AI", term: "디지털 전환 (DT, DX)", definition: "디지털과 물리적 요소들의 통합으로 비즈니스 모델을 변화하고 새롭게 정립하는 과정 [25]. 아날로그 형식의 정보와 문서를 디지털 형식으로 변환하는 활동을 포함함 [25]." },
+            { category: "4차 산업혁명 및 AI", term: "디지털 융합 (Digital Convergence)", definition: "하나의 기기나 서비스에 모든 IT 기술이 융복합되는 현상 [26]. 기존 제품의 디지털화, 디지털 제품 간의 융합, 광대역 네트워크 통합 과정을 거쳐 발전함 [27]." },
+            { category: "4차 산업혁명 및 AI", term: "디지로그 (Digilog)", definition: "디지털 기술과 아날로그 감성의 결합을 뜻하며 [25, 28], 기술과 감성이 공존하는 형태임 [29]." },
+            { category: "4차 산업혁명 및 AI", term: "CPS (사이버 물리 시스템)", definition: "컴퓨팅과 물리 세계가 융합되어 자동화, 지능화되는 시스템 [30]. 현실 세계와 디지털 사이버 세계가 긴밀하게 결합된 초연결 시스템임 [30, 31]." },
+            { category: "4차 산업혁명 및 AI", term: "디지털 트윈 (Digital Twin)", definition: "의사결정을 돕는 시스템의 가상 모델 [32, 33]. 현실 세계의 쌍둥이 모델을 컴퓨터에 만들어 미리 예측 기능을 수행하며, 실시간으로 실제 대상의 변화를 반영하여 업데이트됨 [32, 33]." },
+            { category: "4차 산업혁명 및 AI", term: "AI (인공지능)", definition: "컴퓨터 프로그램이 인간의 학습능력, 판단 능력, 추론 등 지적인 능력을 구현한 기술 분야 [34]. 사람처럼 생각하고 행동할 수 있는 알고리즘 [35, 36]." },
+            { category: "4차 산업혁명 및 AI", term: "머신러닝 (ML)", definition: "데이터를 기반으로 패턴을 학습하고 예측을 수행하여, 인간의 학습능력과 같은 기능을 컴퓨터에 부여하기 위한 기술 [37, 38]. 지도 학습, 비지도 학습, 강화 학습 등으로 분류됨 [39]." },
+            { category: "4차 산업혁명 및 AI", term: "딥러닝 (DL)", definition: "머신러닝 방법 중 하나로, 신경망 기법을 적용하여 빅데이터를 기반으로 스스로 학습하며 판단하는 기술 [37]." },
+            { category: "4차 산업혁명 및 AI", term: "인공신경망 (ANN)", definition: "뉴런의 동작 원리에 기초해 인공적으로 구축한 기계 학습을 위한 통계학적 학습 알고리즘 [35]. 다수의 신호 입력으로 하나의 신호를 출력하는 퍼셉트론 개념을 기반으로 함 [36, 40]." },
+            { category: "4차 산업혁명 및 AI", term: "챗봇 (Chatbot)", definition: "자연어 처리(NLP) 기술을 이용해 사람과 대화할 수 있는 소프트웨어 애플리케이션 [41]. 고객 서비스, 전자상거래 등 다양한 분야에 적용되며 효율성과 비용 절감에 기여함 [42]." },
+            { category: "4차 산업혁명 및 AI", term: "생성형 AI (Generative AI)", definition: "챗GPT와 같이 몇 가지 원리로 자연어 문장을 만들어 내는 능력을 갖춘 AI를 지칭 [43, 44]. 상황 인식을 통한 개인 맞춤화가 가능하며 대화형 AI 기법임 [45]." },
+            { category: "4차 산업혁명 및 AI", term: "ChatGPT", definition: "2022년 12월 Open AI가 공개한 실시간 딥러닝 기반 대화형 인공지능 챗봇 기술 [44, 46]. 사용자와 주고받는 대화에서 질문에 답하도록 설계된 자연어 처리 모델임 [46]." },
+            { category: "4차 산업혁명 및 AI", term: "Web 3.0", definition: "공정, 자율을 지향하며 탈중앙화(분산화) 방식을 특징으로 함 [44, 47]. Semantic(상황 인식) 기술을 기반으로 하며, 지능화된 웹이 원하는 콘텐츠를 제공하는 개인 맞춤화 시대를 의미함 [47]." },
+            { category: "4차 산업혁명 및 AI", term: "O2O (On-line to Off-line)", definition: "오프라인 상점에서 구경 후 온라인으로 주문을 유도하는 방식으로, 오프라인에서 온라인으로 전환하는 전략임 [48, 49]." },
+            { category: "4차 산업혁명 및 AI", term: "O4O (On-line for Off-line)", definition: "온라인에 축적된 데이터를 활용하여 오프라인에서 새로운 비즈니스 모델로 적용하는 전략 (예: 아마존 서점) [48-50]." },
+            
+            // 경영 및 트렌드
+            { category: "경영 및 트렌드", term: "CSR (기업의 사회적 책임)", definition: "기업 수익의 일부를 사회에 환원함으로써 기업의 책임을 대신한다는 개념 [51, 52]. 자선활동과 같은 선행으로 취약계층의 요청에 대한 응답 형태로 진행됨 [51]." },
+            { category: "경영 및 트렌드", term: "CSV (공유가치 창출)", definition: "가치 창출을 통한 사회와 기업의 동반 성장의 중요성을 강조한 개념 [51, 53]. 공유 가치를 창출하고 사회적 가치, 경제적 가치 등으로 합리적 배분을 통한 균형 성장을 추구함 [51]." },
+            { category: "경영 및 트렌드", term: "ESG", definition: "환경(Environmental), 사회적 책임(Social), 지배구조(Governance)를 의미하며, 사회적 가치 창출을 경영의 중심으로 둠 [53, 54]. CSR과 CSV의 확장 개념으로써 필수 요인으로 자리매김 중임 [52, 54]." },
+            { category: "경영 및 트렌드", term: "SVG (공유가치 성장)", definition: "단기적 이윤 극대화를 넘어 지속 가능한 창조와 발전을 가져올 새로운 성장 모델을 지칭함 [54, 55]." },
+            { category: "경영 및 트렌드", term: "PPS (Pain Point Seeker)", definition: "상품이나 제품을 사용하는 과정에서 사람들이 느끼는 불평, 불만, 스트레스를 유발하는 문제(고충)를 계속 찾아내는 사람이나 행위 [56]." },
+            { category: "경영 및 트렌드", term: "알파 세대", definition: "2010년~2024년생으로 추산되며 [57-59], 순수 디지털 네이티브 세대로 소비 지형을 바꿀 주역임 [57, 60]." },
+            { category: "경영 및 트렌드", term: "온택트 (Ontact)", definition: "온라인(Online)과 언택트(Untact)의 합성어 [58, 61, 62]. 2021년 팬데믹 시대에 온라인을 통한 비대면 시장의 활성화 현상을 지칭함 [63]." },
+            { category: "경영 및 트렌드", term: "체리슈머 (Cherry-sumers)", definition: "한정된 자원을 극대화하기 위해 최대한 알뜰하게 소비하는 전략적 소비자 [60, 62]. 무지출, 공동구매 전략을 구사하는 합리적인 소비층임 [60]." },
+            { category: "경영 및 트렌드", term: "캄테크 (Calm-Tech)", definition: "사람들이 인지하지 못한 상태에서 AI 및 IoT 기술로 서비스를 제공하는 '보이지 않는 배려 기술' (calm + tech 합성어) [64-66]." },
+            { category: "경영 및 트렌드", term: "페르소나 (Persona)", definition: "복수의 가면을 뜻하며, 양면적 소비 행태나 다양한 정체성을 추구하는 현상 [66-68]. 고객 세분화 및 초개인화 전략 수립에 필요함 [68]." },
+            { category: "경영 및 트렌드", term: "황소 채찍 효과 (Bullwhip Effect)", definition: "제품에 대한 수요 정보가 SCM(공급사슬관리) 참여 주체를 거슬러 올라갈수록 수요 변동성이 증가하는 정보 왜곡 현상 [69, 70]." },
+            { category: "경영 및 트렌드", term: "VMI (공급자 주도형 재고관리)", definition: "유통업체가 제조업체에 판매 및 재고정보를 제공하면, 제조업체가 이를 토대로 수요를 예측하고 적정 납품량을 결정하는 재고 관리 방식임 [70]." },
+        ];
+
+        const container = document.getElementById('glossaryContainer');
+        const noResults = document.getElementById('noResults');
+
+        // Function to group data by category
+        function groupData(data) {
+            return data.reduce((acc, item) => {
+                if (!acc[item.category]) {
+                    acc[item.category] = [];
+                }
+                acc[item.category].push(item);
+                return acc;
+            }, {});
+        }
+
+        // Function to render the glossary
+        function renderGlossary(data) {
+            const grouped = groupData(data);
+            container.innerHTML = '';
+            let totalItems = 0;
+            let categoryIndex = 0; // 안전한 ID 생성을 위한 인덱스 초기화
+
+            for (const category in grouped) {
+                // 카테고리 이름이 비어있으면 건너뛰기
+                if (!category.trim()) continue;
+
+                totalItems += grouped[category].length;
+                categoryIndex++;
+                // 안전하고 고유한 ASCII 기반 ID 사용
+                const categoryId = `category-${categoryIndex}`; 
+
+                // Category Section Header (Collapsible)
+                const categorySection = document.createElement('div');
+                categorySection.className = 'mb-6';
+                categorySection.innerHTML = `
+                    <button class="category-header w-full flex justify-between items-center bg-indigo-600 hover:bg-indigo-700 text-white p-4 font-bold text-xl rounded-t-xl transition duration-300 shadow-md" onclick="toggleCategory('${categoryId}')">
+                        ${category} (${grouped[category].length})
+                        <svg id="arrow-${categoryId}" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div id="${categoryId}" class="category-content bg-white p-4 border border-gray-200 rounded-b-xl transition-all duration-300 overflow-hidden" style="max-height: 2000px; opacity: 1;">
+                        <ul class="space-y-4">
+                            ${grouped[category].map(item => `
+                                <li class="p-4 border-b border-gray-100 last:border-b-0">
+                                    <h3 class="text-lg font-semibold text-indigo-800 mb-1">${item.term}</h3>
+                                    <p class="text-gray-600 text-sm leading-relaxed">${item.definition}</p>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                `;
+                container.appendChild(categorySection);
+            }
+
+            // Show/Hide No Results Message
+            if (totalItems === 0) {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+            }
+        }
+
+        // Function to toggle category visibility
+        window.toggleCategory = function(id) {
+            const content = document.getElementById(id);
+            const arrow = document.getElementById(`arrow-${id}`);
+            
+            // 널(null) 검사 로직 유지
+            if (!content || !arrow) {
+                console.error("Category or arrow element not found for ID:", id);
+                return;
+            }
+
+            if (content.style.maxHeight === '0px' || content.style.maxHeight === '') {
+                // Expand
+                content.style.maxHeight = content.scrollHeight + 'px';
+                content.style.opacity = '1';
+                content.classList.remove('rounded-b-xl');
+                arrow.style.transform = 'rotate(0deg)';
+            } else {
+                // Collapse
+                content.style.maxHeight = '0px';
+                content.style.opacity = '0';
+                arrow.style.transform = 'rotate(-90deg)';
+                // Re-add border radius after transition (optional, but looks cleaner)
+                setTimeout(() => {
+                    if (content.style.maxHeight === '0px') {
+                        content.classList.add('rounded-b-xl');
+                    }
+                }, 300);
+            }
+        };
+
+        // Function to filter the glossary items
+        window.filterGlossary = function() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+            
+            const filteredData = glossaryData.filter(item => 
+                item.term.toLowerCase().includes(searchTerm) || 
+                item.definition.toLowerCase().includes(searchTerm) ||
+                item.category.toLowerCase().includes(searchTerm)
+            );
+            
+            renderGlossary(filteredData);
+            
+            // If searching, keep all matching categories expanded for visibility
+            if (searchTerm) {
+                document.querySelectorAll('.category-content').forEach(content => {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                    content.style.opacity = '1';
+                    content.classList.remove('rounded-b-xl');
+                    const id = content.id;
+                    const arrow = document.getElementById(`arrow-${id}`); 
+                    if (arrow) { 
+                        arrow.style.transform = 'rotate(0deg)';
+                    }
+                });
+            } else {
+                // When search is empty, collapse all categories initially
+                document.querySelectorAll('.category-content').forEach(content => {
+                    content.style.maxHeight = '0px';
+                    content.style.opacity = '0';
+                    content.classList.add('rounded-b-xl');
+                    const id = content.id;
+                    const arrow = document.getElementById(`arrow-${id}`); 
+                    if (arrow) { 
+                        arrow.style.transform = 'rotate(-90deg)';
+                    }
+                });
+            }
+        };
+
+        // Initialize on load (render all and collapse all)
+        window.onload = function() {
+            renderGlossary(glossaryData);
+            filterGlossary(); // Initial call to collapse sections
+        };
+
+    </script>
+</body>
+</html>
