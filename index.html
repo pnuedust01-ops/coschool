@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이수호 금융 포트폴리오 - 부산대학교 연계 과정</title>
+    <!-- Tailwind CSS CDN 로드 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* 기본 폰트 설정 (Inter를 기반으로 한 깔끔한 Sans-serif) */
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            background-color: #f8fafc; /* Slate 50 or Gray 50 */
+        }
+        /* 메인 배너 배경 스타일 */
+        .hero-banner {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); /* Deep Indigo to Blue */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        /* 카드 호버 효과 */
+        .portfolio-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .portfolio-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 헤더 / 메인 배너 섹션 -->
+    <header class="hero-banner text-white py-16 mb-12 rounded-b-3xl">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight mb-2">
+                금융일반 교과연계 포트폴리오
+            </h1>
+            <p class="text-xl sm:text-2xl font-light opacity-90 mb-6">
+                부산대학교 수강 내용 정리 및 심화 학습
+            </p>
+            <div class="mt-8 text-lg font-medium bg-white/10 inline-block px-6 py-2 rounded-full border border-white/30 shadow-lg">
+                <span class="font-semibold mr-4">이수호 학생</span> | 브니엘고등학교 1학년
+            </div>
+        </div>
+    </header>
+
+    <!-- 메인 콘텐츠 섹션 -->
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <section class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">
+                포트폴리오 주요 항목
+            </h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">
+                부산대 연계 과정을 통해 학습한 금융 지식과 핵심 개념을 정리한 두 가지 핵심 콘텐츠를 확인해보세요.
+            </p>
+        </section>
+
+        <!-- 핵심 항목 카드 (금융용어사전 & 교과핵심정리) -->
+        <div class="grid md:grid-cols-2 gap-8 lg:gap-12 mb-16">
+
+            <!-- 1. 금융용어사전 카드 (dict.html 연결) -->
+            <a href="dict.html" class="portfolio-card block bg-white p-8 sm:p-10 rounded-2xl shadow-xl border border-gray-100 text-gray-800 hover:ring-4 hover:ring-indigo-200/50">
+                <div class="flex items-start">
+                    <!-- 돋보기 아이콘 (Lucide: Search) -->
+                    <svg class="w-10 h-10 text-indigo-600 mr-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                    <div>
+                        <h3 class="text-2xl sm:text-3xl font-bold mb-2">
+                            금융용어사전
+                        </h3>
+                        <p class="text-gray-500">
+                            부산대 수업에서 배운 필수 금융 용어들을 알파벳/가나다 순으로 정리하고 해설했습니다.
+                        </p>
+                    </div>
+                </div>
+                <div class="mt-6 flex justify-end">
+                    <span class="text-indigo-600 font-semibold hover:text-indigo-700">사전 보기 &rarr;</span>
+                </div>
+            </a>
+
+            <!-- 2. 교과핵심정리 카드 (외부 URL 연결) -->
+            <a href="https://gemini.google.com/share/a698dfe106c2" target="_blank" class="portfolio-card block bg-white p-8 sm:p-10 rounded-2xl shadow-xl border border-gray-100 text-gray-800 hover:ring-4 hover:ring-indigo-200/50">
+                <div class="flex items-start">
+                    <!-- 책 아이콘 (Lucide: Book Open) -->
+                    <svg class="w-10 h-10 text-indigo-600 mr-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.206 5 7.5 5A2.5 2.5 0 005 7.5c0 1.365.584 2.658 1.6 3.5.766.657 1.636 1.157 2.59 1.49l-2.9 3.25L9 19l4.5-5.06a4.5 4.5 0 011.59-.838.5.5 0 00.12-.012l.13-.01a.5.5 0 00.31-.13l.03-.03a.5.5 0 00.12-.22l.03-.13c.01-.06.01-.12.01-.18A4.5 4.5 0 0012 6.253zM12 6.253c1.168 0 2.794.477 4.5 1.25S20 10.4 20 12c0 1.365-.584 2.658-1.6 3.5-.766.657-1.636 1.157-2.59 1.49l2.9 3.25L15 19l-4.5-5.06a4.5 4.5 0 01-1.59-.838.5.5 0 00-.12-.012l-.13-.01a.5.5 0 00-.31-.13l-.03-.03a.5.5 0 00-.12-.22l-.03-.13c-.01-.06-.01-.12-.01-.18A4.5 4.5 0 0012 6.253zM12 6.253"></path>
+                    </svg>
+                    <div>
+                        <h3 class="text-2xl sm:text-3xl font-bold mb-2">
+                            교과 핵심 정리
+                        </h3>
+                        <p class="text-gray-500">
+                            수업 모듈별 핵심 이론, 주요 개념, 그리고 금융 시장의 작동 원리를 체계적으로 정리했습니다.
+                        </p>
+                    </div>
+                </div>
+                <div class="mt-6 flex justify-end">
+                    <span class="text-indigo-600 font-semibold hover:text-indigo-700">정리 내용 보기 (새 창) &rarr;</span>
+                </div>
+            </a>
+
+        </div>
+        
+        <!-- 새 섹션: 교과내용요약보기 (PDF 파일 연결됨) -->
+        <div class="mb-16">
+            <a href="수업자료.pdf" target="_blank" class="block bg-green-500 hover:bg-green-600 text-white font-extrabold py-6 px-8 rounded-2xl shadow-xl transition duration-300 text-center text-xl sm:text-2xl portfolio-card">
+                <div class="flex items-center justify-center">
+                    <!-- 아이콘 (Lucide: File Text - 파일이 텍스트 문서를 포함함을 나타냄) -->
+                    <svg class="w-8 h-8 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2-10H7a4 4 0 00-4 4v10a2 2 0 002 2h14a2 2 0 002-2V8a4 4 0 00-4-4z"></path>
+                    </svg>
+                    교과내용요약보기
+                </div>
+            </a>
+        </div>
+        <!-- // 새 섹션 끝 -->
+
+        <!-- 새 섹션: 수강 소감 및 다짐 -->
+        <section class="mb-20">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 border-b-2 border-gray-200 pb-2">
+                🌟 수강 소감 및 포부
+            </h2>
+            <div class="bg-white p-8 sm:p-10 rounded-2xl shadow-xl border-l-8 border-indigo-500">
+                <blockquote class="text-lg italic text-gray-700 leading-relaxed">
+                    <p class="mb-4">
+                        처음에 수업을 들을 때에는 많이 어렵고 하기 힘들었는데, 매주 와서 수업을 들으니 점점 실력이 늘고 많이 알게 되었던 것 같습니다.
+                    </p>
+                    <p class="mb-4">
+                        2명의 선생님께서 항상 열정적으로 가르쳐 주셔서 저도 따라 열심히 들으려고 노력했었던 것 같습니다.
+                    </p>
+                    <p>
+                        2달 간의 수업이 저에게 진짜 도움이 된 것 같아 뿌듯하고, 다음에 또 수업을 들을 기회가 있다면 꼭 다시 듣고 싶습니다.
+                    </p>
+                </blockquote>
+                <div class="text-right mt-6 text-indigo-600 font-semibold">
+                    — 브니엘고등학교 1학년, 이수호
+                </div>
+            </div>
+        </section>
+        <!-- // 새 섹션 끝 -->
+
+    </main>
+
+    <!-- 푸터 섹션 -->
+    <footer class="mt-16 py-8 bg-gray-800 text-white/80 rounded-t-xl">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-sm mb-1">
+                © 2024 이수호 금융 포트폴리오
+            </p>
+            <p class="text-xs">
+                교과연계 부산대학교 금융일반 과정 수강 자료
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>
